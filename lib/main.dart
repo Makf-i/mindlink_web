@@ -27,17 +27,19 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return MaterialApp.router(
-            routerConfig: router,
-          );
-        }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
+          );
+        }
+
+        if (snapshot.hasData) {
+          return MaterialApp.router(
+            routerDelegate: router.routerDelegate,
+            routeInformationParser: router.routeInformationParser,
           );
         } else {
           return const MaterialApp(
@@ -49,7 +51,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   }
 }
 
-final router = GoRouter(
+final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
@@ -57,21 +59,39 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: 'text',
-          builder: (context, state) => TextScreen(
-            strmLink: state.uri.queryParameters['id'],
-          ),
+          builder: (context, state) {
+            final id = state.uri.queryParameters['id'];
+            final type = state.uri.queryParameters['type'];
+            // Handle null or invalid type values
+            if (type == 'text') {
+              return TextScreen(strmLink: id ?? '');
+            }
+            return const Center(child: Text('Invalid type for TextScreen'));
+          },
         ),
         GoRoute(
           path: 'video',
-          builder: (context, state) => VideoScreen(
-            strmLink: state.uri.queryParameters['id'],
-          ),
+          builder: (context, state) {
+            final id = state.uri.queryParameters['id'];
+            final type = state.uri.queryParameters['type'];
+            // Handle null or invalid type values
+            if (type == 'video') {
+              return VideoScreen(strmLink: id ?? '');
+            }
+            return const Center(child: Text('Invalid type for VideoScreen'));
+          },
         ),
         GoRoute(
           path: 'image',
-          builder: (context, state) => ImageScreen(
-            strmLink: state.uri.queryParameters['id'],
-          ),
+          builder: (context, state) {
+            final id = state.uri.queryParameters['id'];
+            final type = state.uri.queryParameters['type'];
+            // Handle null or invalid type values
+            if (type == 'image') {
+              return ImageScreen(strmLink: id ?? '');
+            }
+            return const Center(child: Text('Invalid type for ImageScreen'));
+          },
         ),
       ],
     ),

@@ -46,7 +46,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MindLink'),
+        title: const Text('MindLinking'),
         actions: !isMobile
             ? [
                 IconButton(
