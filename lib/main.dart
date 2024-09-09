@@ -74,16 +74,7 @@ final GoRouter router = GoRouter(
           path: 'image',
           builder: (context, state) {
             final id = state.uri.queryParameters['id'];
-            final type = state.uri.queryParameters['type'];
-
-            // Add a check to make sure type is 'image'
-            if (type == 'image') {
-              return ImageScreen(strmLink: id);
-            } else {
-              return const Scaffold(
-                body: Center(child: Text("Invalid type!")),
-              );
-            }
+            return ImageScreen(strmLink: id);
           },
         ),
       ],
