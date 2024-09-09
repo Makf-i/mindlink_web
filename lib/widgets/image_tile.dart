@@ -20,7 +20,7 @@ class _BoxWidState extends ConsumerState<BoxWid> {
   void _sharePost(String postId, String postType) async {
     final String encodedUrl = Uri.encodeComponent(postId);
     final String postUrl =
-        'https://mindlink.com/image?id=$encodedUrl&type=$postType';
+        'https://mindlink-web.vercel.app/image?id=$encodedUrl&type=$postType';
 
     // Use the share_plus package to share the URL
     await Share.share('Check out this post: $postUrl');

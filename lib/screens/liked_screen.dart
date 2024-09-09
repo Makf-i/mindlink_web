@@ -27,24 +27,15 @@ class LikedScreen extends ConsumerWidget {
         .toList();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Liked Posts'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: isMobile
-            ? const EdgeInsets.all(18)
-            : const EdgeInsets.only(left: 250.0, right: 250),
-        child: likedImages.isNotEmpty ||
-                likedVideos.isNotEmpty ||
-                likedText.isNotEmpty
-            ? SingleChildScrollView(
-                child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: isMobile
+              ? const EdgeInsets.all(18)
+              : const EdgeInsets.only(left: 250.0, right: 250),
+          child: likedImages.isNotEmpty ||
+                  likedVideos.isNotEmpty ||
+                  likedText.isNotEmpty
+              ? Column(
                   children: [
                     if (likedImages.isNotEmpty)
                       ListView.builder(
@@ -71,9 +62,9 @@ class LikedScreen extends ConsumerWidget {
                         ),
                       ),
                   ],
-                ),
-              )
-            : const Center(child: Text("No liked post yet")),
+                )
+              : const Center(child: Text("No liked post yet")),
+        ),
       ),
     );
   }
