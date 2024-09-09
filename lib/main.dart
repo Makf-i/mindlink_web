@@ -38,8 +38,7 @@ class _MyAppState extends ConsumerState<MyApp> {
 
         if (snapshot.hasData) {
           return MaterialApp.router(
-            routerDelegate: router.routerDelegate,
-            routeInformationParser: router.routeInformationParser,
+            routerConfig: router,
           );
         } else {
           return const MaterialApp(
@@ -61,36 +60,21 @@ final GoRouter router = GoRouter(
           path: 'text',
           builder: (context, state) {
             final id = state.uri.queryParameters['id'];
-            final type = state.uri.queryParameters['type'];
-            // Handle null or invalid type values
-            if (type == 'text') {
-              return TextScreen(strmLink: id ?? '');
-            }
-            return const Center(child: Text('Invalid type for TextScreen'));
+            return TextScreen(strmLink: id);
           },
         ),
         GoRoute(
           path: 'video',
           builder: (context, state) {
             final id = state.uri.queryParameters['id'];
-            final type = state.uri.queryParameters['type'];
-            // Handle null or invalid type values
-            if (type == 'video') {
-              return VideoScreen(strmLink: id ?? '');
-            }
-            return const Center(child: Text('Invalid type for VideoScreen'));
+            return VideoScreen(strmLink: id);
           },
         ),
         GoRoute(
           path: 'image',
           builder: (context, state) {
             final id = state.uri.queryParameters['id'];
-            final type = state.uri.queryParameters['type'];
-            // Handle null or invalid type values
-            if (type == 'image') {
-              return ImageScreen(strmLink: id ?? '');
-            }
-            return const Center(child: Text('Invalid type for ImageScreen'));
+            return ImageScreen(strmLink: id);
           },
         ),
       ],
