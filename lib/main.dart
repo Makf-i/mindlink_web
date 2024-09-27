@@ -50,7 +50,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   }
 }
 
-final GoRouter router = GoRouter(
+final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
@@ -58,24 +58,24 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           path: 'text',
-          builder: (context, state) {
-            final id = state.uri.queryParameters['id'];
-            return TextScreen(strmLink: id);
-          },
+          builder: (context, state) => TabsScreen(
+            selectedTab: 'text', 
+            strmLink: state.uri.queryParameters['id'], 
+          ),
         ),
         GoRoute(
           path: 'video',
-          builder: (context, state) {
-            final id = state.uri.queryParameters['id'];
-            return VideoScreen(strmLink: id);
-          },
+          builder: (context, state) => TabsScreen(
+            selectedTab: 'video', 
+            strmLink: state.uri.queryParameters['id'], 
+          ),
         ),
         GoRoute(
           path: 'image',
-          builder: (context, state) {
-            final id = state.uri.queryParameters['id'];
-            return ImageScreen(strmLink: id);
-          },
+          builder: (context, state) => TabsScreen(
+            selectedTab: 'image', 
+            strmLink: state.uri.queryParameters['id'], 
+          ),
         ),
       ],
     ),

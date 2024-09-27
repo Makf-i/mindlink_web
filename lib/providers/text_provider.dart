@@ -30,6 +30,7 @@ class TextNotifier extends StateNotifier<List<PostModel>> {
     }
     state = d;
   }
+  
 
   void addToLikedImage(String id, bool fav) async {
     var likeStatus = !fav;

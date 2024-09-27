@@ -10,22 +10,37 @@ import 'package:mindlink_web_app/screens/tabs_screen.dart/text.dart';
 import 'package:mindlink_web_app/screens/tabs_screen.dart/video.dart';
 
 class TabsScreen extends ConsumerStatefulWidget {
-  const TabsScreen({super.key});
+  const TabsScreen({
+    super.key,
+    this.selectedTab,
+    this.strmLink,
+  });
+
+  final String? selectedTab;
+  final String? strmLink;
 
   @override
   ConsumerState<TabsScreen> createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends ConsumerState<TabsScreen> {
+  int _selectedIndex = 0;
+
   @override
   void initState() {
     super.initState();
     ref.read(textProvider.notifier).loadData();
     ref.read(videoProvider.notifier).loadData();
     ref.read(imageProvider.notifier).loadData();
-  }
 
-  int _selectedIndex = 0;
+    if (widget.selectedTab == 'text') {
+      _selectedIndex = 0; // Text tab index
+    } else if (widget.selectedTab == 'video') {
+      _selectedIndex = 1; // Video tab index
+    } else if (widget.selectedTab == 'image') {
+      _selectedIndex = 2; // Image tab index
+    }
+  }
 
   final List<Widget> _screens = const [
     TextScreen(),
@@ -39,6 +54,8 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       _selectedIndex = index;
     });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +170,7 @@ class NavigationRailWidget extends StatelessWidget {
           label: Text('Images'),
         ),
         NavigationRailDestination(
-          icon: Icon(Icons.image),
+          icon: Icon(Icons.favorite),
           label: Text('Liked Posts'),
         ),
       ],
