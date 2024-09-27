@@ -159,7 +159,7 @@ class NavigationRailWidget extends StatelessWidget {
       destinations: const [
         NavigationRailDestination(
           icon: Icon(Icons.text_fields),
-          label: Text('Texts'),
+          label: Text('Texting'),
         ),
         NavigationRailDestination(
           icon: Icon(Icons.video_library),
