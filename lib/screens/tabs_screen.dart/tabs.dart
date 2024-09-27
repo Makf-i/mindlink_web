@@ -42,20 +42,18 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     }
   }
 
-  final List<Widget> _screens = const [
-    TextScreen(),
-    VideoScreen(),
-    ImageScreen(),
-    LikedScreen(),
-  ];
+  // final List<Widget> _screens = const [
+  //   TextScreen(),
+  //   VideoScreen(),
+  //   ImageScreen(),
+  //   LikedScreen(),
+  // ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +110,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
               onItemTapped: _onItemTapped,
             ),
           Expanded(
-            child: _screens[_selectedIndex],
+            child: _buildSelectedScreen(),
           ),
         ],
       ),
@@ -137,6 +135,25 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
             )
           : null, // Don't show BottomNavigationBar on larger screens
     );
+  }
+
+  Widget _buildSelectedScreen() {
+    switch (_selectedIndex) {
+      case 0:
+        return TextScreen(
+            strmLink:
+                widget.strmLink); // Pass the stream link to the TextScreen
+      case 1:
+        return VideoScreen(
+            strmLink:
+                widget.strmLink); // Pass the stream link to the VideoScreen
+      case 2:
+        return ImageScreen(
+            strmLink:
+                widget.strmLink); // Pass the stream link to the ImageScreen
+      default:
+        return const LikedScreen(); // Fallback to LikedScreen
+    }
   }
 }
 
