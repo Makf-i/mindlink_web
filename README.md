@@ -1,6 +1,4 @@
-# mindlink_web_app
-
-A new Flutter project.
+use the link to access the website: https://service-provider-manager.vercel.app/
 
 ## Getting Started
 
